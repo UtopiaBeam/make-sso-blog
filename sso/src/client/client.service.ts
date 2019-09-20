@@ -16,29 +16,24 @@ export class ClientService {
         return hashSync(secret, process.env.SECRET);
     }
 
-    async create({ callbackUrl }: ClientDto) {
+    async create({ callbackUrl }: ClientDto): Promise<Client> {
         const secret: string = uuid();
         const client = new this.model({
             callbackUrl,
             secret: this.hashSecret(secret),
         });
         await client.save();
-        return { callbackUrl, secret };
+        client.secret = secret;
+        return client;
     }
 
-    updateCallbackUrl(id: string, callbackUrl: string) {
-        return this.model.findByIdAndUpdate(id, { callbackUrl }, { new: true });
+    updateCallbackUrl(id: string, callbackUrl: string): Promise<Client> {
+        return this.model
+            .findByIdAndUpdate(id, { callbackUrl }, { new: true })
+            .exec();
     }
 
-    async resetSecret(id: string) {
-        const secret: string = uuid();
-        await this.model.findByIdAndUpdate(id, {
-            secret: this.hashSecret(secret),
-        });
-        return { secret };
-    }
-
-    delete(id: string) {
-        return this.model.findOneAndDelete(id);
+    delete(id: string): Promise<Client> {
+        return this.model.findOneAndDelete(id).exec();
     }
 }
