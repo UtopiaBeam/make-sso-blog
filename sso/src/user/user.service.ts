@@ -13,6 +13,13 @@ export class UserService {
         return hashSync(password, process.env.SECRET);
     }
 
+    findById(id: string, fields?: string): Promise<User> {
+        if (fields) {
+            return this.model.findById(id, fields).exec();
+        }
+        return this.model.findById(id).exec();
+    }
+
     findByName(username: string): Promise<User> {
         return this.model.findOne({ username }).exec();
     }
