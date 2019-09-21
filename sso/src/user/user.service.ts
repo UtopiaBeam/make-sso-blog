@@ -25,7 +25,7 @@ export class UserService {
         return user.save();
     }
 
-    async verify({ username, password }: UserDto): Promise<User> {
+    async verify(username: string, password: string): Promise<User> {
         const user = await this.findByName(username);
         return user.password === hashSync(password) ? user : null;
     }
