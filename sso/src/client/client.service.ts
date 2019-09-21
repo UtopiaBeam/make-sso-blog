@@ -16,6 +16,10 @@ export class ClientService {
         return hashSync(secret, process.env.SECRET);
     }
 
+    findById(id: string): Promise<Client> {
+        return this.model.findById(id).exec();
+    }
+
     async create({ callbackUrl }: ClientDto): Promise<Client> {
         const secret: string = uuid();
         const client = new this.model({
@@ -35,5 +39,10 @@ export class ClientService {
 
     delete(id: string): Promise<Client> {
         return this.model.findOneAndDelete(id).exec();
+    }
+
+    async verify(id: string, secret: string): Promise<boolean> {
+        const client = await this.findById(id);
+        return client.secret === this.hashSecret(secret);
     }
 }
