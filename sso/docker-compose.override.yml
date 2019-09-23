@@ -9,7 +9,7 @@ services:
     ports:
       - 3000:3000
     environment: 
-      MONGO_URL: mongodb://db/sso
+      MONGO_URL:
       SECRET:
     depends_on:
       - db
