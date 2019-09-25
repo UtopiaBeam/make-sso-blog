@@ -10,7 +10,7 @@ export class UserService {
     constructor(@InjectModel(UserModel) private readonly model: Model<User>) {}
 
     private hashPassword(password: string): string {
-        return hashSync(password, process.env.SECRET);
+        return hashSync(password);
     }
 
     findById(id: string, fields?: string): Promise<User> {

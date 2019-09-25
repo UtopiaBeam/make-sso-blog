@@ -13,7 +13,7 @@ export class ClientService {
     ) {}
 
     private hashSecret(secret: string) {
-        return hashSync(secret, process.env.SECRET);
+        return hashSync(secret);
     }
 
     findById(id: string): Promise<Client> {
