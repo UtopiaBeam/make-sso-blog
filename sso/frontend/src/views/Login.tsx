@@ -8,7 +8,9 @@ export default () => {
   useEffect(() => {
     const token = new Cookies().get('token');
     if (token) {
-      const appid = new URLSearchParams().get('appid') as string;
+      const appid = new URLSearchParams(window.location.search).get(
+        'appid',
+      ) as string;
       loginWithToken(appid, token);
     }
   });
