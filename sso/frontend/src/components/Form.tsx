@@ -1,7 +1,11 @@
 import React, { useState, FormEvent } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import {
+  makeStyles,
+  createStyles,
+  Theme,
+  TextField,
+  Button,
+} from '@material-ui/core';
 import { Credentials } from '../types';
 
 interface Props {
@@ -19,9 +23,10 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      width: 250,
     },
     textField: {
-      width: 250,
+      width: '100%',
     },
     buttonWrapper: {
       width: '100%',

@@ -22,3 +22,7 @@ export function register(appid: string, credentials: Credentials) {
     headers: { appid },
   });
 }
+
+export function registerApp(callbackUrl: string) {
+  return axios.post(`${apiUrl}/client`, { callbackUrl });
+}
